@@ -1,6 +1,6 @@
 #video_element {
-	/*position : absolute;*/
-	/*visibility : hidden;*/
+	position : absolute;
+	visibility : hidden;
 }
 #canvas_element{
 	height:375px;

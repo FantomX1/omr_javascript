@@ -78,12 +78,49 @@ function inter(){
 		}
 	}
 	context.putImageData(img, 0, 0, 0, 0, img.width, img.height);
-	for(var y = 0; y < img.height; y++) {
-		for(var x = 0; x < img.width; x++) {
-			var red = img.data[((img.width * y) + x) * 4];
-			var green = img.data[((img.width * y) + x) * 4 + 1];
-			var blue = img.data[((img.width * y) + x) * 4 + 2];
+	img_temp=context.getImageData(0, 0, img.width, img.height);
+	context_preview=$("#preview")[0].getContext("2d");
+	for(x=1;x<100;x++){
+		for(y=1;y<100;y++){
+			var curr = (y * 4) * img_temp.width + x * 4;
+			var curr_left = (y * 4) * img_temp.width + (x-1) * 4;
+			var curr_top = ((y-1) * 4) * img_temp.width + x * 4;
+			var curr_right = (y * 4) * img_temp.width + (x+1) * 4;
+			var curr_bot = ((y+1) * 4) * img_temp.width + x * 4;
+
+			var red = img_temp.data[i];
+		            var green = img_temp.data[i + 1];
+            		var blue = img_temp.data[i + 2];
+			img_temp.data[i]=red;
+			img_temp.data[i+1]=green;
+			img_temp.data[i+2]=blue;
+
 		}
 	}
+	for(var x =40; x<100;x = x+10){
+		var single_col = [];
+		for(y=0;y<100;y++){
+			var i = (y*4)*img_temp.width + x*4;
+			if(img_temp.data[i] == 255){
+			single_col.push(1);
+			}else{
+				single_col.push(0);			}
+		}
+		// console.log(single_col);
+		// var change-count = find_pattern(single_col);
+		break;
+	}
+	context_preview.putImageData(img_temp,0,0);
 
+}
+function find_pattern (array) {
+	var count = 0;
+	for(var x = 0;x<array.length; x++){
+		// console.log(array[x]);
+		if(array[x]!=array[x+1]){
+			count = count +1;
+		}
+
+	}
+	console.log(count);
 }
