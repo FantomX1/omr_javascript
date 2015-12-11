@@ -1,5 +1,5 @@
 canvas = document.getElementById('canvas_element');
-parts=100;
+parts=50;
 isStreaming=false;
 context=canvas.getContext('2d');
 width = 600,
@@ -54,7 +54,7 @@ function inter(){
 		for(x=(width/parts)*part_counter;x<=(width/parts)*(part_counter+1);x++){
 			for(y=0;y<height;y++){
 				var i = (y * 4) * img.width + x * 4;
-				var avg = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3;
+				var avg = (img.data[i]*0.2 + img.data[i + 1]*0.7 + img.data[i + 2]*0.1);
 				counter=counter+1;
 				sum=sum+avg;
 			}
@@ -63,7 +63,7 @@ function inter(){
 		for(x=(width/parts)*part_counter;x<(width/parts)*(part_counter+1);x++){
 			for(y=0*part_counter;y<height;y++){
 				var i = (y * 4) * img.width + x * 4;
-				var avg = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3;
+				var avg = (img.data[i]*0.2 + img.data[i + 1]*0.7 + img.data[i + 2]*0.1);
 				counter=counter+1;
 				sum=sum+avg;
 				if(avg>threshold){
@@ -77,9 +77,13 @@ function inter(){
 			}
 		}
 	}
-
 	context.putImageData(img, 0, 0, 0, 0, img.width, img.height);
-}
-function threshold () {
-	console.log("came");
+	for(var y = 0; y < img.height; y++) {
+		for(var x = 0; x < img.width; x++) {
+			var red = img.data[((img.width * y) + x) * 4];
+			var green = img.data[((img.width * y) + x) * 4 + 1];
+			var blue = img.data[((img.width * y) + x) * 4 + 2];
+		}
+	}
+
 }
