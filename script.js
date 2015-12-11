@@ -1,5 +1,5 @@
 canvas = document.getElementById('canvas_element');
-parts=30;
+parts=100;
 isStreaming=false;
 context=canvas.getContext('2d');
 width = 600,
@@ -50,9 +50,9 @@ function inter(){
 	slider=document.getElementById("slider_element");
 	var counter=0;
 	var sum=0;
-	for(part_counter=0;part_counter<parts;part_counter++){
-		for(x=(width/parts)*part_counter;x<(width/parts)*(part_counter+1);x++){
-			for(y=(height/parts)*part_counter;y<height;y++){
+	for(part_counter=0;part_counter<=parts;part_counter++){
+		for(x=(width/parts)*part_counter;x<=(width/parts)*(part_counter+1);x++){
+			for(y=0;y<height;y++){
 				var i = (y * 4) * img.width + x * 4;
 				var avg = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3;
 				counter=counter+1;
@@ -61,7 +61,7 @@ function inter(){
 		}
 		threshold=sum/counter;
 		for(x=(width/parts)*part_counter;x<(width/parts)*(part_counter+1);x++){
-			for(y=(height/parts)*part_counter;y<height;y++){
+			for(y=0*part_counter;y<height;y++){
 				var i = (y * 4) * img.width + x * 4;
 				var avg = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3;
 				counter=counter+1;
